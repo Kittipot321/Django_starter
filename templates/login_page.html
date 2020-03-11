@@ -1,0 +1,34 @@
+{% extends 'base_lite.html' %}
+{% block content %}
+<h2>หน้าเข้าสู่ระบบ</h2><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="card border-success mb-3" style="height: 275px;">
+                <div class="card-header">POSmart</div>
+                <div class="card-body">
+                    <p class="card-text">Point Of Sale หรือเรียกกันสั้นๆ ว่า POS นั้น คือการเก็บข้อมูลการขาย
+                        และข้อมูลกาบันทึกค่าใช้จ่ายที่เกิดขึ้น เมื่อมีการขายสินค้า การบริการ โดยทั่วไปแล้ว POS
+                        นั้นจะมีความเกี่ยวข้องกับเทคโนโลยี หรืออุปกรณ์ เช่น คอมพิวเตอร์ การอ่านบาร์โค้ด
+                        การอ่านแถบแม่เหล็ก หรือหลายๆ เทคโนโลยีผสมกัน เป็นต้น</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                <label>ชื่อผู้ใช้ : </label>
+                <input type="text" class="form-control" name="username" id="">
+                <label>รหัสผ่าน : </label>
+                <input type="password" class="form-control" name="password" id=""><br>
+                <input type="submit" value="เข้าสู่ระบบ" class="btn btn-primary col">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

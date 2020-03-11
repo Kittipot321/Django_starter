@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Base</title>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}">
+
+    <style>
+        header[role="banner"] {
+            #logo-main {
+                display: block;
+                margin: 20px auto;
+            }
+        }
+
+        #navbar-primary.navbar-default {
+            background: transparent;
+            border: none;
+
+            .navbar-nav {
+                width: 100%;
+                text-align: center;
+
+                >li {
+                    display: inline-block;
+                    float: none;
+
+                    >a {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                    }
+                }
+            }
+        }
+    </style>
+
+</head>
+<script>
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+      }
+      function checkTime(i) {
+        if (i < 10) {i = "0" + i};
+        return i;
+      }
+    </script>
+<body onload="startTime()">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="navbar-brand"><img src="{% static 'payment-terminal.png' %}"> POSmart</div>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">   
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <label class="navbar-brand" href="#">{% now "j F Y" %}</label>
+                </li>
+                <li class="nav-item">
+                    <label class="navbar-brand" id="txt"></label>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="{% url 'index' %}"><div class="btn btn-primary">Back to menu</div></a> 
+<h2>เปลี่ยนรหัสผ่าน</h2><br>
+<div class="container">
+    <h1>{{message}}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <br>
+        <input type="submit" value="Save Changes" class="btn btn-outline-success">
+    </form>
+</div>
+{% endblock %}

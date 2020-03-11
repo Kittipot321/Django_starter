@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>อัพเดทประเภทสินค้า</h2>
+<hr>
+<div class="container">
+  {%if notice%}
+  <div class="alert alert-info" role="alert">
+    {{notice}}
+  </div>
+  {% endif %}
+
+  <form action="{% url 'typeupdate' type_id=num %}" method="POST">
+    {% csrf_token %}
+        <label>ชื่อประเภทสินค้า :</label>
+        <input type="text" name="name" value="{{type.name}}" class="form-control" required>
+        <label>รายละเอียดประเภทสินค้า :</label>
+        <input type="text" name="desc" value="{{type.description}}"class="form-control">
+    <br>
+    <div class="row">
+      <div class="col">
+        <input type="submit" value="ตกลง" class="btn btn-success col">
+      </div>
+      <div class="col">
+        <a href="{% url 'edittype' %}"><input type="button" value="กลับไปยังหน้าจัดการประเภทสินค้า" class="btn btn-primary col"></a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

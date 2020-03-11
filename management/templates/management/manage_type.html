@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>จัดการประเภทสินค้า</h2><hr>
+<form action="{% url 'addtype' %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            <p class="text-center">เพิ่มประเภทสินค้า</p>
+        </div>
+        <div class="col">
+            <input type="text" name="txt_typename" id="" class="form-control" placeholder="ชื่อประเภทสินค้า" required>
+        </div>
+        <div class="col-5">
+            <input type="text" name="txt_typedesc" id="" class="form-control" placeholder="รายละเอียด" required>
+        </div>
+        <div class="col">
+            <a href="#">
+                <input type="submit" value="เพิ่ม" class="btn btn-outline-success">
+            </a>
+        </div>
+    </div>
+</form><br>
+<div class="container">
+    <table class="table">
+        <col width='120'>
+        <col width='300'>
+        <col width='10'>
+        <col width='10'>
+        <tr>
+            <td>ชื่อประเภท</td>
+            <td>รายละเอียด</td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% for t in type %}
+            <tr>
+                <td>{{t.name}}</td>
+                <td>{{t.description}}</td>
+                <td>
+                    <a href="{% url 'typeupdate' type_id=t.id %}">
+                        <div class="btn btn-warning col">อัพเดท</div>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'deltype' type_id=t.id %}">
+                        <div class="btn btn-danger col">ลบ</div>
+                    </a>
+                </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

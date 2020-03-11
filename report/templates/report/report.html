@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .tbody {
+        height: 60vh;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+</style>
+<h3>รายงานสรุปยอดขาย</h3>
+<hr>
+<div class="row">
+    <div class="col">
+        <a href="{% url 'reportfilters' filters_select='day' %}">
+            <div class="btn btn-light col border">วัน</div>
+        </a>
+    </div>
+    <div class="col">
+        <a href="{% url 'reportfilters' filters_select='week' %}">
+            <div class="btn btn-light col border">สัปดาห์</div>
+        </a>
+    </div>
+    <div class="col">
+        <a href="{% url 'reportfilters' filters_select='month' %}">
+            <div class="btn btn-light col border">เดือน</div>
+        </a>
+    </div>
+    <div class="col">
+        <a href="{% url 'reportfilters' filters_select='year' %}">
+            <div class="btn btn-light col border">ปี</div>
+        </a>
+    </div>
+</div><br>
+<div class="tbody">
+    <table class="table text-center">
+        <tr>
+            <td>หมายเลขออเดอร์</td>
+            <td>วัน/เวลา</td>
+            <td>ราคารวม</td>
+        </tr>
+        {% for c in order %}
+        <tr>
+            <td>{{c.id}}</td>
+            <td>{{c.date_time}}</td>
+            <td>{{c.total_price|stringformat:".2f"}} บาท</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<h4>ยอดขายทั้งหมดสำหรับ{{text}} : {{total|stringformat:'.2f'}} บาท</h4>
+{% endblock %}
