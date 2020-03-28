@@ -7,7 +7,7 @@
       <div class="col-lg">
         <!-- Product -->
         <div class="card">
-          <div class="card-header text-center" style="background-color: #FFFF00;">สินค้า</div>
+          <div class="card-header text-center bg-primary text-white ">สินค้า</div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
               <form method="GET" action="{% url 'index' %}">
@@ -45,7 +45,7 @@
                   </tr>
                 </thead>
               </table>
-              <div class="tbody">
+              <div class="tproduct">
                 <table class="table text-center table-striped">
                   {% for p in product %}
                   <tr>
@@ -68,23 +68,26 @@
       <div class="col-lg-4">
         <!-- my cart -->
         <div class="card">
-          <div class="card-header text-center" style="background-color: rgb(37, 209, 37);">ตะกร้าสินค้า</div>
+          <div class="card-header text-center text-white" style="background-color: rgb(37, 209, 37);">ตะกร้าสินค้า</div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
               <table class="table text-center">
-                <tr>
-                  <td>สินค้า</td>
-                  <td>ราคา</td>
-                  <td></td>
-                </tr>
+                <thead class="bg-success text-light">
+                  <tr>
+                    <td width='60'></td>
+                    <td width='100'>สินค้า</td>
+                    <td width='100'>ราคา</td>
+                    <td width='100'></td>
+                  </tr>
+                </thead>
               </table>
-              <div class="tbody">
+              <div class="tcart">
                 <table class="table text-center">
                   {% for c in carts %}
                   <tr>
+                    <td>{{c.amount}}</td>
                     <td>{{c.products.name}}</td>
                     <td>{{c.products.price|stringformat:".2f"}}</td>
-                    <td>{{c.amount}}</td>
                     <td>
                       <a href="{% url 'delcart' product_id=c.id %}">
                         <div class="btn btn-danger">ลบ</div>
@@ -107,8 +110,13 @@
   </div>
 </body>
 <style>
-  .tbody {
+  .tcart {
     height: 40vh;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+  .tproduct {
+    height: 46vh;
     overflow: scroll;
     overflow-x: hidden;
   }

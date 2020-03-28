@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -58,7 +58,7 @@ def index(request):
         total += Product.objects.get(pk=c.products_id).price*c.amount
     if select > '0':
         product = product.filter(type=select)
-    context = {
+    context = { 
         'product':product,
         'type':types,
         'search':search,
@@ -69,6 +69,7 @@ def index(request):
     }
     return render(request,'main/index.html',context=context)
 # เพิ่มสินค้าในตะกร้า
+@login_required
 def add_to_cart(request,product_id):
     product = Product.objects.get(pk=product_id)
     item = My_Cart.objects.all()
@@ -90,22 +91,27 @@ def add_to_cart(request,product_id):
     item.save()
     return redirect('index')
 # นำสินค้าออกจากตะกร้า
+@login_required
 def remove_to_cart(request,product_id):
     order_pro = My_Cart.objects.get(pk=product_id)
     order_pro.delete()
     return redirect('index')
 # บันทึกการขาย
+@login_required
 def order_save(request):
     total = 0
     cart = My_Cart.objects.all()
     for c in cart:
         total += Product.objects.get(pk=c.products_id).price * c.amount
-    order = Order.objects.create(total_price=total)
-    for c in cart:
-        order_product = Order_Products.objects.create(
-            order_id=order.id,
-            amount=c.amount,
-            product_id=Product.objects.get(pk=c.products_id).id
-        )
-        cart.delete()
+    if total == 0:
+        return HttpResponse('ไม่มีสินค้าในตะกร้า')
+    else:
+        order = Order.objects.create(total_price=total)
+        for c in cart:
+            order_product = Order_Products.objects.create(
+                order_id=order.id,
+                amount=c.amount,
+                product_id=Product.objects.get(pk=c.products_id).id
+            )
+            cart.delete()
     return redirect('index')

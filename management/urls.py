@@ -18,9 +18,9 @@ from django.urls import path,include
 from .views import *
 urlpatterns = [
     path('',manage,name='manage'),
-    path('product/<int:product_id>',product_update,name='pup'),
     path('product',add_product,name='addpd'),
     path('product/add',add_to_database,name='adddb'),
+    path('product/<int:product_id>',product_update,name='pup'),
     path('product/delete/<int:product_id>/',delete_product,name='del_product'),
     path('edit_type/',edit_type,name='edittype'),
     path('edit_type/<int:type_id>',type_update,name='typeupdate'),

@@ -38,7 +38,7 @@ def product_update(request,product_id):
             product.price = request.POST.get('txt_4')
             product.save()
             notice = 'บันทึกข้อมูลเรียบร้อยแล้ว'
-        except:
+        except ValueError:
             notice = 'โอ๊ะ! ประเภทข้อมูลผิดพลาด'
     context={
         'num':product_id,
@@ -65,7 +65,7 @@ def add_to_database(request):
                 price=request.POST.get('txt_4'),
             )
         notice = 'การเพิ่มสินค้าของคุณสำเร็จแล้ว -> หมายเลขสินค้าที่ %s' % (create.id)
-    except:
+    except ValueError:
         notice = 'โอ๊ะ! ประเภทข้อมูลผิดพลาด'
     context = {
         'create':create,
@@ -116,9 +116,9 @@ def type_update(request,type_id):
 @login_required
 def add_product(request):
     page_title = 'Add Product'
-    types = Type.objects.all()
+    type = Type.objects.all()
     context = {
-        'type':types,
+        'type':type,
         'page_title':page_title
     }
     return render(request,'management/product_form.html',context=context)

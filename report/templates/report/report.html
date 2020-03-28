@@ -2,12 +2,12 @@
 {% block content %}
 <style>
     .tbody {
-        height: 60vh;
+        height: 55vh;
         overflow: scroll;
         overflow-x: hidden;
     }
 </style>
-<h3>รายงานสรุปยอดขาย</h3>
+<h2>รายงานสรุปยอดขาย</h2>
 <hr>
 <div class="row">
     <div class="col">
@@ -30,6 +30,11 @@
             <div class="btn btn-light col border">ปี</div>
         </a>
     </div>
+    <div class="col">
+        <a href="{% url 'reportfilters' filters_select='all' %}">
+            <div class="btn btn-light col border">ทั้งหมด</div>
+        </a>
+    </div>
 </div><br>
 <div class="tbody">
     <table class="table text-center">
@@ -47,5 +52,8 @@
         {% endfor %}
     </table>
 </div>
+<hr>
+{% if text %}
 <h4>ยอดขายทั้งหมดสำหรับ{{text}} : {{total|stringformat:'.2f'}} บาท</h4>
+{% endif %}
 {% endblock %}

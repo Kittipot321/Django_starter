@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>จัดการประเภทสินค้า</h2><hr>
-<form action="{% url 'addtype' %}" method="post">
+<form method="post" action="{% url 'addtype' %}">
     {% csrf_token %}
     <div class="row">
         <div class="col">
@@ -13,11 +13,9 @@
         <div class="col-5">
             <input type="text" name="txt_typedesc" id="" class="form-control" placeholder="รายละเอียด" required>
         </div>
-        <div class="col">
-            <a href="#">
-                <input type="submit" value="เพิ่ม" class="btn btn-outline-success">
-            </a>
-        </div>
+        {% comment %} <div class="col">
+            <input type="submit" value="เพิ่ม" class="btn btn-outline-success">
+        </div> {% endcomment %}
     </div>
 </form><br>
 <div class="container">

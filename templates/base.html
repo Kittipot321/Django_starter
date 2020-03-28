@@ -67,7 +67,7 @@ function checkNumber(i) {
   }
 </script>
 <body onload="Clock()">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #01579B;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -82,13 +82,13 @@ function checkNumber(i) {
                     <a class="nav-link" href="{% url 'manage' %}">จัดการสินค้า</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'reportfilters' filters_select='day' %}">รายงานสรุป</a>
+                    <a class="nav-link" href="{% url 'reportfilters' filters_select='all' %}">รายงานสรุป</a>
                 </li>
             </ul>
             <ul class="navbar-nav" style="width: 225px;">
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #01579B; color: white;">
                         {% if request.user.username == 'admin'%}
                             Administrator
                         {% else %}
